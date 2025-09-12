@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Washman AI</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../static/images/washman_favicon.png" type="image/png" />
+
+    <!-- Google Fonts: Poppins -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- HTMX cdn -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/index.css" />
+  </head>
+  <body>
+    <header>
+      <img height="64" src="../static/images/walton.png" alt="Walton Logo" />
+      <h1>Washman AI</h1>
+    </header>
+
+    <div class="container">
+      <div class="image-wrapper">
+        <img height="150" src="../static/images/washman_logo.png" alt="Washman AI Image" />
+      </div>
+
+      <div class="intro box">
+        <h2>I am Walton Washman AI, ready to help you</h2>
+        <p>
+          I am your washing machine assistant. Whether it’s using the machine,
+          solving problems, or getting buying advice – ask anything below or
+          speak through the microphone.
+        </p>
+      </div>
+
+      <div class="input-area">
+        <div class="input-wrapper">
+          <textarea
+            name="query"
+            id="userInput"
+            placeholder="Speak or Write your query here..."
+            oninput="autoResize(this)"
+          ></textarea>
+          <button class="mic-btn" onclick="startListening()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z" />
+              <path d="M19 11a7 7 0 0 1-14 0h2a5 5 0 0 0 10 0h2z" />
+              <line x1="12" y1="19" x2="12" y2="23" />
+              <line x1="8" y1="23" x2="16" y2="23" />
+            </svg>
+          </button>
+        </div>
+        
+        <!-- htmx request -->
+        <button
+          class="submit-btn"
+          hx-post="/"
+          hx-target="#response"
+          hx-include="#userInput"
+        >
+          Ask your query
+        </button>
+      </div>
+
+      <!-- dynamic response area -->
+      <div id="response"></div>
+    </div>
+
+    <script src="../static/index.js"></script>
+  </body>
+</html>

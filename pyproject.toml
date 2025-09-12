@@ -1,0 +1,16 @@
+[project]
+name = "washman-ai"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "beautifulsoup4>=4.13.5",
+    "chromadb>=1.0.20",
+    "dotenv>=0.9.9",
+    "flask>=3.1.2",
+    "huggingface-hub>=0.34.4",
+    "pdf2image>=1.17.0",
+    "pypdf2>=3.0.1",
+    "pytesseract>=0.3.13",
+]

@@ -1,0 +1,151 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #fafafa;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: white;
+  border-bottom: 1px solid #eee;
+  gap: 10px;
+}
+
+header img {
+  height: 32px;
+}
+
+header h1 {
+  font-size: 36px;
+  margin: 0;
+  color: #333;
+}
+
+.container {
+  width: 70%;
+  margin: 5px auto;
+}
+
+.image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* optional spacing */
+}
+
+.intro {
+  text-align: center;
+  padding: 15px 20px;
+  margin-bottom: 30px;
+}
+
+.intro h2 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.intro p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+}
+
+
+.input-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.input-wrapper textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 48px 12px 14px; /* space for mic */
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  resize: none;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+
+.mic-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px; /* bottom-right inside textarea */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.mic-btn svg {
+  width: 25px;
+  height: 25px;
+  stroke: #d46a4c;
+  fill: none;
+  stroke-width: 1.5;
+  transition: stroke 0.2s ease;
+}
+
+.mic-btn:hover svg {
+  stroke: #b5553a;
+}
+
+.input-area button.submit-btn {
+  background: #d46a4c;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+}
+
+.input-area button.submit-btn:hover {
+  background: #b5553a;
+}
+
+#response {
+  margin-top: 20px;
+}
+
+.box {
+  background: #f5f4f2;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+h2, h3 {
+  color: #444;
+  margin-top: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+p {
+  color: #555;
+  line-height: 1.6;
+  font-family: 'Poppins', sans-serif;
+}
+
+.reply-text{
+  white-space: pre-line;
+}
