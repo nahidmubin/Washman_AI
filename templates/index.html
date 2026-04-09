@@ -6,7 +6,7 @@
     <title>Washman AI</title>
     
     <!-- Favicon -->
-    <link rel="icon" href="../static/images/washman_favicon.png" type="image/png" />
+    <link rel="icon" href="{{ url_for('static', path='images/washman_favicon.png') }}" type="image/png" />
 
     <!-- Google Fonts: Poppins -->
     <link
@@ -18,17 +18,17 @@
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../static/index.css" />
+    <link rel="stylesheet" href="{{ url_for('static', path='index.css') }}" />
   </head>
   <body>
     <header>
-      <img height="64" src="../static/images/walton.png" alt="Walton Logo" />
+      <img height="64" src="{{ url_for('static', path='images/walton.png') }}" alt="Walton Logo" />
       <h1>Washman AI</h1>
     </header>
 
     <div class="container">
       <div class="image-wrapper">
-        <img height="150" src="../static/images/washman_logo.png" alt="Washman AI Image" />
+        <img height="150" src="{{ url_for('static', path='images/washman_logo.png') }}" alt="Washman AI Image" />
       </div>
 
       <div class="intro box">
@@ -73,6 +73,6 @@
       <div id="response"></div>
     </div>
 
-    <script src="../static/index.js"></script>
+    <script src="{{ url_for('static', path='index.js') }}"></script>
   </body>
 </html>
