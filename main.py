@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
+from fastapi.sse import EventSourceResponse, ServerSentEvent
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from typing import Annotated
@@ -32,8 +33,19 @@ templates = Jinja2Templates(directory="templates")
 def home(request: Request):
     return templates.TemplateResponse(request, "index.html")
 
-@app.post("/", response_class=HTMLResponse)
-def reply(request: Request, query:Annotated[str, Form()]):
-    reply = washmans_reply(query)
+latest_query = ''
 
-    return templates.TemplateResponse(request, 'reply.html', {"query": query, "reply": reply})
+@app.post("/ask", response_class=HTMLResponse)
+def ask(request: Request, query:Annotated[str, Form()]):
+    global latest_query
+    latest_query = query
+
+    return templates.TemplateResponse(request, 'reply.html', {"query": latest_query})
+
+
+@app.get("/stream", response_class=EventSourceResponse)
+def reply():
+    reply = washmans_reply(latest_query)
+    for chunk in reply:
+        yield ServerSentEvent(raw_data=chunk, event='message')
+    yield ServerSentEvent(raw_data="done", event="close")

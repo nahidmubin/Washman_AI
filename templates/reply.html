@@ -7,5 +7,10 @@
 <!-- AI response -->
 <div class="box">
   <h2>Washman AI's Recommendations:</h2>
-  <p class="reply-text">{{ reply }}</p>
+  <p class="reply-text" id="reply"
+    hx-ext="sse"
+    sse-connect="/stream"
+    sse-swap="message"
+    sse-close="close"
+    hx-swap="beforeend"></p>
 </div>

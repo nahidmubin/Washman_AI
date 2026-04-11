@@ -31,10 +31,10 @@ function startListening() {
 }
 
 // Smooth scroll to HTMX response
-document.addEventListener('htmx:afterSwap', function (event) {
-    if (event.target.id === 'response') {
-        setTimeout(() => {
-            event.target.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+document.body.addEventListener("htmx:sseMessage", function (event) {
+    const el = document.getElementById("reply"); // your SSE element
+
+    if (el) {
+        el.scrollIntoView({ behavior: "auto", block: "end" });
     }
 });

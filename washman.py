@@ -42,16 +42,29 @@ def washmans_reply(user_prompt):
     """
 
     # Step 4: Send to LLM
-    chat_completion = hf_client.chat.completions.create(
+    stream = hf_client.chat.completions.create(
         model="meta-llama/Meta-Llama-3-8B-Instruct",
         messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ],
         max_tokens=1024,
+        stream=True,
     )
 
-    return chat_completion.choices[0].message.content
+    for chunk in stream:
+        if not chunk.choices:
+            continue
+
+        delta = chunk.choices[0].delta
+
+        if not delta:
+            continue
+
+        content = getattr(delta, "content", None)
+
+        if content:
+            yield content
 
 
 
@@ -61,4 +74,5 @@ if __name__ == "__main__":
     reply = washmans_reply(user_prompt)
 
     print("\n\nModel Response:\n")
-    print(reply)
+    for token in reply:
+        print(token, end="", flush=True)

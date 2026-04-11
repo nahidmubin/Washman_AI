@@ -15,7 +15,8 @@
     />
 
     <!-- HTMX cdn -->
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js" integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/htmx-ext-sse@2.2.4" integrity="sha384-A986SAtodyH8eg8x8irJnYUk7i9inVQqYigD6qZ9evobksGNIXfeFvDwLSHcp31N" crossorigin="anonymous"></script>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', path='index.css') }}" />
@@ -61,7 +62,7 @@
         <!-- htmx request -->
         <button
           class="submit-btn"
-          hx-post="/"
+          hx-post="/ask"
           hx-target="#response"
           hx-include="#userInput"
         >
