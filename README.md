@@ -16,7 +16,7 @@
 - **PDF & TXT Document Processing**: Extracts and analyzes information from washing machine manuals and guides in the `data/` folder.
 - **Vector Search (RAG)**: Uses vector embeddings and [ChromaDB](https://www.trychroma.com/) for fast, context-aware document retrieval.
 - **AI-Powered Responses**: Integrates with Hugging Face LLMs for natural language answers.
-- **Web Interface**: User-friendly Flask app with support for speech-to-text input.
+- **Web Interface**: User-friendly FastAPI app with support for speech-to-text input and streaming responses via Server-Sent Events (SSE).
 
 ---
 
@@ -70,23 +70,24 @@ python3 vectorizer.py
 
 ### 6. Start the Web Application
 
-Launch the Flask server ([app.py](app.py)):
+Launch the FastAPI server ([main.py](main.py)):
 
 ```bash
-uv run flask run
+uv run fastapi dev main.py
 ```
-Or:
+or,
+
 ```bash
-flask run
+fastapi dev main.py
 ```
 
-Visit [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
+Visit [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 
 ---
 
 ## Project Structure
 
-- [app.py](app.py): Flask web server.
+- [main.py](main.py): FastAPI web server.
 - [washman.py](washman.py): AI assistant logic and Hugging Face integration.
 - [vectorizer.py](vectorizer.py): Document chunking and vector embedding.
 - [pdf_processor.py](pdf_processor.py): PDF text extraction and OCR.
