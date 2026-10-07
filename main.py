@@ -4,7 +4,7 @@ from fastapi.sse import EventSourceResponse, ServerSentEvent
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from typing import Annotated
-from washman import washmans_reply
+from washman_agent import washmans_reply
 
 
 description = """

@@ -1,4 +1,3 @@
-from pdf_processor import process_pdfs_in_directory
 from txt_file_processor import process_txt_in_directory
 import chromadb
 from chromadb.utils.embedding_functions import DefaultEmbeddingFunction
@@ -13,28 +12,30 @@ emb_fn = DefaultEmbeddingFunction()
 chroma_client = chromadb.PersistentClient(path="./chroma_db")
 
 
-def vectorize(file_directory, collection):
-    chunks = process_pdfs_in_directory(file_directory)
-    chunks.extend(process_txt_in_directory(file_directory))
-    collection = chroma_client.get_or_create_collection(name=collection, embedding_function=emb_fn)
-    collection.add(documents=chunks, ids=[str(i) for i in range(1, len(chunks)+1)])
+def vectorize(file_directory):
+    # chunks = process_pdfs_in_directory(file_directory)
+    collection_with_chunks = process_txt_in_directory(file_directory)
+    for collection, chunks in collection_with_chunks.items():
+        collection = chroma_client.get_or_create_collection(name=collection, embedding_function=emb_fn)
+        collection.add(documents=chunks, ids=[str(i) for i in range(1, len(chunks)+1)])
 
 
 if __name__ == '__main__':
 
     DATA_FILE_PATH = "./data"
-    COLLECTION="washing_machine_data"
-    vectorize(DATA_FILE_PATH, COLLECTION)
+    vectorize(DATA_FILE_PATH)
 
-    query_text = """ATP70 Washing Machine Price"""
+
+    ########### Testing after Vectorizing ############
+    # query_text = """ATP70 Washing Machine Price"""
     
-    collection = chroma_client.get_collection(name=COLLECTION, embedding_function=emb_fn)
-    results = collection.query(query_texts=[query_text], n_results=3)
+    # collection = chroma_client.get_collection(name="walton_website_data", embedding_function=emb_fn)
+    # results = collection.query(query_texts=[query_text], where_document={"$contains": "ATP70"}, n_results=10)
 
 
-    if results and results["documents"]:
-        retrieved_docs = results["documents"][0]
+    # if results and results["documents"]:
+    #     retrieved_docs = results["documents"][0]
 
-    context_text = "\n\n".join(retrieved_docs) if retrieved_docs else "No Relevant information was found"
+    # context_text = "\n\n".join(retrieved_docs) if retrieved_docs else "No Relevant information was found"
 
-    print(context_text)
+    # print(context_text)

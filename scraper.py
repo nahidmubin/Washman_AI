@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-WEB_DATA_PATH = "./data/web_data.txt"
+WEB_DATA_PATH = "./data/walton_website_data.txt"
 
 def get_wm_data(url):
 
@@ -10,16 +10,18 @@ def get_wm_data(url):
         model_data = ""
         soup = BeautifulSoup(response.text, "html.parser")
 
-        model_name = soup.title.string
-        price = soup.find("span", class_="final_price").text
+        model_name = soup.title.string.strip()
+        wm_type = soup.find_all("li", class_="breadcrumb-item")[2].get_text(strip=True)
+        price = soup.find("span", class_="final_price").get_text(strip=True)
 
-        model_data += f"Washing Machine Model: {model_name},\nPrice: {price} Taka\n\n"
+        model_data += f"\nWashing Machine Model: {model_name},\nType: {wm_type},\nPrice: {price} Taka\n"
 
         tabs = soup.find_all("div", class_="tab-pane dc-extra-product-tab")
 
         for tab in tabs:
             tab_data = tab.get_text(strip=True, separator=", ")
-            model_data += f"Info: {tab_data}\n\n"
+            if tab_data and not tab_data.startswith("Download"):
+                model_data += f"{tab_data}\n"
 
         return model_data
 
@@ -56,7 +58,7 @@ def get_all_wm_data(path_to_save):
         data = get_single_type_wm_data(url)
         all_models_data.extend(data)
 
-    with open(path_to_save, "w") as f:
+    with open(path_to_save, "w", encoding='utf-8') as f:
         f.write("\n".join(all_models_data))
 
 if __name__ == '__main__':

@@ -2,7 +2,7 @@
 
 ![Washman](static/images/washman_logo.png)
 
-**Washman AI** is a demo AI assistant for Walton Washing Machines. It uses Retrieval-Augmented Generation (RAG) and LLMs to answer user queries, troubleshoot issues, and provide usage advice through a web interface.
+**Washman AI** is a web-based agentic AI assistant for Walton Washing Machines. It combines Retrieval-Augmented Generation (RAG) with autonomous agent capabilities to intelligently answer user queries, troubleshoot issues, and provide usage advice through an interactive web interface.
 
 > **Project Credits:**  
 > This project is a demonstration and was primarily developed with the help of ChatGPT for backend, frontend, and image generation. Manual fine-tuning was applied where needed.  
@@ -13,10 +13,11 @@
 
 ## Features
 
-- **PDF & TXT Document Processing**: Extracts and analyzes information from washing machine manuals and guides in the `data/` folder.
+- **Agentic RAG System**: Combines autonomous agents with vector-based document retrieval for intelligent, context-aware interactions.
+- **TXT Document Processing**: Extracts and analyzes information from washing machine manuals and guides in the `data/` folder.
 - **Vector Search (RAG)**: Uses vector embeddings and [ChromaDB](https://www.trychroma.com/) for fast, context-aware document retrieval.
-- **AI-Powered Responses**: Integrates with Hugging Face LLMs for natural language answers.
-- **Web Interface**: User-friendly FastAPI app with support for speech-to-text input and streaming responses via Server-Sent Events (SSE).
+- **AI-Powered Agent**: Integrates with Smolagents and Hugging Face LLMs for autonomous task execution and natural language answers.
+- **Web Interface**: User-friendly FastAPI webapp with support for speech-to-text input and streaming responses via Server-Sent Events (SSE).
 
 ---
 
@@ -47,11 +48,11 @@ HUGGINGFACE_API_KEY=your_hugging_face_key
 
 ### 4. Add Data Files
 
-Place washing machine manuals and guides (PDF/TXT) in the `data/` folder. Example:
+Place washing machine manuals and guides (TXT) in the `data/` folder. Example:
 
 ```
 data/
-    washing_machine_manual.pdf
+    washing_machine_manual.txt
     web_data.txt
     ...
 ```
@@ -88,11 +89,12 @@ Visit [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 ## Project Structure
 
 - [main.py](main.py): FastAPI web server.
-- [washman.py](washman.py): AI assistant logic and Hugging Face integration.
+- [washman_agent.py](washman_agent.py): Agentic AI assistant logic with tool integration.
+- [washman_tools.py](washman_tools.py): Custom tools and utilities for the agent.
 - [vectorizer.py](vectorizer.py): Document chunking and vector embedding.
-- [pdf_processor.py](pdf_processor.py): PDF text extraction and OCR.
 - [txt_file_processor.py](txt_file_processor.py): TXT file extraction and processing.
-- `templates/`: HTML templates.
+- [scraper.py](scraper.py): Web data scraping utilities.
+- `templates/`: HTML templates for the web interface.
 - `static/`: CSS, JS, and images.
 - `data/`: Place your PDF and TXT manuals here.
 - `chroma_db/`: ChromaDB vector database files.
